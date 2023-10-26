@@ -1,4 +1,10 @@
+"use client"
+import CustomButton from "./CustomButton"
+
 const Hero = () => {
+    const handleClick = () => {
+        alert("This function has not yet finished!")
+    }
     return(
         <div className="hero">
             <div className="flex-1 pt-36 padding-x">
@@ -9,6 +15,7 @@ const Hero = () => {
                 <p className="hero__subtitle">
                     Streamline your car rental experience with our efforless booking process
                 </p>
+                <CustomButton title="Explore Cars" containerStyles="bg-primary-blue text-white rounded-full mt-10" handleClick={handleClick}/>
             </div>
         </div>
     )
