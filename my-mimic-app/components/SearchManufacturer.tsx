@@ -48,10 +48,16 @@ const SearchManufacturer = ({manufacturer, setManufacturer}: searchManufacturerT
                                     <Combobox.Option
                                         key={item}
                                         value={item}
-                                        className={({active}) => `
+                                        className={( {active }) => `
                                         relative search-manufacturer__option
-                                        ${active ? "bg-primary-blue text-white" : "text-gray-900"}`}>
-                                        {item}
+                                        ${active ? "bg-[#3344AA] text-white" : "text-gray-900"}`}>
+                                        {({ selected }) => (                                          
+                                             <span className={`block truncate ${
+                                                selected ? 'font-bold' : 'font-normal'
+                                             }`}>
+                                                {item}
+                                             </span>
+                                        )}
                                     </Combobox.Option>
                                 ))
                             }
