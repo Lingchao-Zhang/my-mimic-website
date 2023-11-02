@@ -1,6 +1,6 @@
 'use client'
 import { CarsType } from "@/types"
-import { calculateCarRent } from "@/utils"
+import { calculateCarRent, generateImageUrl } from "@/utils"
 import Image from "next/image"
 import CustomButton from "./CustomButton"
 import { useState } from "react"
@@ -28,7 +28,7 @@ const CarCard = ({car}: CarsType) => {
             </p>
             <div className="relative w-full h-40 my-3 object-obtain">
                 <Image 
-                  src="/hero.png"
+                  src={generateImageUrl(car)}
                   alt="Car modal"
                   className="object-contain"
                   fill priority />

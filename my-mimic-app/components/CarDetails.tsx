@@ -1,4 +1,5 @@
 import { CarsDetailsType } from "@/types"
+import { generateImageUrl } from "@/utils"
 import { Dialog, Transition } from "@headlessui/react"
 import Image from "next/image"
 import { Fragment } from "react"
@@ -43,7 +44,7 @@ const CarDetails = ({isOpen, closeModal, car}: CarsDetailsType) => {
                                 <div className="car-details__main-image">
                                     <Image                                     
                                      className="object-contain"
-                                     src="/hero.png"
+                                     src={generateImageUrl(car)}
                                      alt="Car Image"
                                      fill priority/>
                                 </div>
@@ -51,21 +52,21 @@ const CarDetails = ({isOpen, closeModal, car}: CarsDetailsType) => {
                                     <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                                         <Image                                     
                                         className="object-contain"
-                                        src="/hero.png"
+                                        src={generateImageUrl(car, "29")}
                                         alt="Car Image"
                                         fill priority/>
                                     </div>
                                     <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                                         <Image                                     
                                         className="object-contain"
-                                        src="/hero.png"
+                                        src={generateImageUrl(car, "33")}
                                         alt="Car Image"
                                         fill priority/>
                                     </div>
                                     <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                                         <Image                                     
                                         className="object-contain"
-                                        src="/hero.png"
+                                        src={generateImageUrl(car, "13")}
                                         alt="Car Image"
                                         fill priority/>
                                     </div>
