@@ -1,5 +1,6 @@
 import { CarType } from "@/types";
 
+// get car data through api
 export const fetchCars = async () => {
     const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla';
     const headers = {
@@ -12,6 +13,7 @@ export const fetchCars = async () => {
     return result
 }
 
+// get car images through api
 export const generateImageUrl = (car: CarType, angle?: string) => {
   const baseUrl = new URL('https://cdn.imagin.studio/getimage')
   const{ make, model, year } = car
@@ -40,5 +42,7 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
   
     return rentalRatePerDay.toFixed(0);
   };
+
+
 
 
