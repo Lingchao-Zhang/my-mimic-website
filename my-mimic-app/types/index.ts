@@ -31,3 +31,9 @@ export interface CarType{
 export interface CarsType{
     car: CarType
 }
+
+export interface CarsDetailsType{
+    isOpen: boolean,
+    closeModal: () => void,
+    car: CarType
+}

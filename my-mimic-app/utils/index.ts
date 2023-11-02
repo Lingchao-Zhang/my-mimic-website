@@ -1,3 +1,5 @@
+import { CarType } from "@/types";
+
 export const fetchCars = async () => {
     const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla';
     const headers = {
@@ -8,6 +10,20 @@ export const fetchCars = async () => {
     const result = response.json()
 
     return result
+}
+
+export const generateImageUrl = (car: CarType, angle?: string) => {
+  const baseUrl = new URL('https://cdn.imagin.studio/getimage')
+  const{ make, model, year } = car
+
+  baseUrl.searchParams.append('customer', 'hrjavascript-mastery')
+  baseUrl.searchParams.append('make', make)
+  baseUrl.searchParams.append('modelFamily', model.split("")[0])
+  baseUrl.searchParams.append('zoomType', 'fullscreen')
+  baseUrl.searchParams.append('modelYear', `${year}`)
+  baseUrl.searchParams.append('angle', `${angle}`)
+
+  return `${baseUrl}`
 }
 
 export const calculateCarRent = (city_mpg: number, year: number) => {
@@ -24,3 +40,5 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
   
     return rentalRatePerDay.toFixed(0);
   };
+
+

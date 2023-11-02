@@ -1,12 +1,15 @@
 'use client'
 import { CarsType } from "@/types"
-import { calculateCarRent } from "@/utils"
+import { calculateCarRent, generateImageUrl } from "@/utils"
 import Image from "next/image"
 import CustomButton from "./CustomButton"
+import { useState } from "react"
+import CarDetails from "./CarDetails"
 
 const CarCard = ({car}: CarsType) => {
     const {city_mpg, make, model, transmission, drive, year} = car
     const carRent = calculateCarRent(city_mpg, year)
+    const [isOpen, setIsOpen] = useState(false)
     return(
         <div className="car-card group">
             <div className="car-card__content">
@@ -25,7 +28,7 @@ const CarCard = ({car}: CarsType) => {
             </p>
             <div className="relative w-full h-40 my-3 object-obtain">
                 <Image 
-                  src="/hero.png"
+                  src={generateImageUrl(car)}
                   alt="Car modal"
                   className="object-contain"
                   fill priority />
@@ -53,9 +56,10 @@ const CarCard = ({car}: CarsType) => {
                         containerStyles='w-full py-[16px] rounded-full bg-primary-blue'
                         textStyles='text-white text-[14px] leading-[17px] font-bold'
                         icon='/right-arrow.svg'
-                        handleClick={() => {}}
+                        handleClick={() => setIsOpen(true)}
                     />
                 </div>
+                <CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car}/>
             </div>
         </div>
     )
