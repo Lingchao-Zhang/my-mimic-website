@@ -1,7 +1,7 @@
-import { CarType, FiltersType } from "@/types";
+import { CarType, FilterType } from "@/types";
 
 // get car data through api
-export const fetchCars = async (filters: FiltersType) => {
+export const fetchCars = async (filters: FilterType) => {
     const {manufacturer, model, fuel, year, limit} = filters
     // create url based on manufacturer and model
     const url = `
@@ -47,6 +47,13 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
   
     return rentalRatePerDay.toFixed(0);
   };
+
+  export const updateParamsOfCustomFilters = (type: string, value: string) => {
+    const searchParams = new URLSearchParams(window.location.search)
+    type === "fuel" ? searchParams.set("fuel_type", value) : searchParams.set(type, value)
+    const newPathName = `${window.location.pathname}?${searchParams.toString()}`
+    return newPathName
+  }
 
 
 
