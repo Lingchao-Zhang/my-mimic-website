@@ -54,3 +54,9 @@ export interface CustomFilterType{
     title: string,
     options: OptionType[]
 }
+
+export interface ShowMoreButtonType{
+    pageNumber: number,
+    isNext: Boolean
+}
+
