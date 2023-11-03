@@ -37,3 +37,11 @@ export interface CarsDetailsType{
     closeModal: () => void,
     car: CarType
 }
+
+export interface FiltersType{
+    manufacturer: string,
+    model: string,
+    fuel: string,
+    year: number,
+    limit: number
+}

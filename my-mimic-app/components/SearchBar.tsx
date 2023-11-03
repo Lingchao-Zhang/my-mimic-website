@@ -24,6 +24,7 @@ const SearchBar = () => {
         const searchParams = new URLSearchParams(window.location.search)
         // if user type in manufacturer search, then add to manufacuturer,
         // else delete the privous manufacturer
+        // user search for manufacturer and model => set manufacturer and model in searchParams
         if(manufacturer){
           searchParams.set('manufacturer', manufacturer)
         } else{
@@ -40,7 +41,7 @@ const SearchBar = () => {
         const newPathname = `${window.location.pathname}?${searchParams.toString()}`
         
         // use router to redirect
-        router.push(newPathname)
+        router.push(newPathname, {scroll: false})
       }
 
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {

@@ -1,23 +1,28 @@
-import { CarType } from "@/types";
+import { CarType, FiltersType } from "@/types";
 
 // get car data through api
-export const fetchCars = async () => {
-    const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla';
+export const fetchCars = async (filters: FiltersType) => {
+    const {manufacturer, model, fuel, year, limit} = filters
+    // create url based on manufacturer and model
+    const url = `
+    https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&model=${model}&fuel_type=${fuel}&year=${year}&limit=${limit}
+    `;
     const headers = {
 		'X-RapidAPI-Key': '0c6655773bmsh8e531863cf07ca4p114fa4jsnaebb326da0a7',
 		'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com'
 	}
+    // request using created url => get response(data) 
     const response = await fetch(url, {headers: headers})
     const result = response.json()
 
     return result
 }
 
+
 // get car images through api
 export const generateImageUrl = (car: CarType, angle?: string) => {
   const baseUrl = new URL('https://cdn.imagin.studio/getimage')
   const{ make, model, year } = car
-
   baseUrl.searchParams.append('customer', 'hrjavascript-mastery')
   baseUrl.searchParams.append('make', make)
   baseUrl.searchParams.append('modelFamily', model.split("")[0])
