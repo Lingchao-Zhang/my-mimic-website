@@ -1,8 +1,20 @@
-import { CarCard, CustomFilter, Hero, SearchBar } from "@/components";
+import { CarCard, CustomFilter, Hero, SearchBar, ShowMoreButton } from "@/components";
+import { fuels, yearsOfProduction } from "@/constants";
+import { CarType } from "@/types";
 import {fetchCars} from "@/utils";
 
-export default async function Home() {
-  const Cars = await fetchCars()
+export default async function Home({searchParams}: any) {
+  const Cars = await fetchCars(
+    {
+      // get manufacturer and model from searchParams
+      // form them as an object and pass to fetchCars function
+      manufacturer: searchParams.manufacturer || "",
+      model: searchParams.model || "",
+      fuel: searchParams.fuel_type || "",
+      year: searchParams.year || 2020,
+      limit: searchParams.limit || 10
+    }
+  )
   const isDataEmpty = !Cars || !Array.isArray(Cars) || Cars.length === 0
   return (
     <main className="overflow-hidden">
@@ -14,10 +26,12 @@ export default async function Home() {
           <div className="home__filters">
             <SearchBar /> 
             <div className="home__filter-container">
-              <CustomFilter/>
-              <CustomFilter/>
+              <CustomFilter title="fuel" options={fuels}/>
+              <CustomFilter title="year" options={yearsOfProduction}/>
             </div>
             {
+              (searchParams.manufacturer !== undefined || searchParams.model !== undefined)
+              &&
               isDataEmpty 
               ? 
               <div className="home__error-container">
@@ -27,17 +41,29 @@ export default async function Home() {
                 <p>{Cars.message}</p>
               </div>
               :
+              (!isDataEmpty
+              ?
               <section>
-                <div className="home__cars-wrapper">
-                  {
-                    Cars.map((car) => <CarCard car={car}/>)
-                  }
-                </div>
-              </section>
+              <div className="home__cars-wrapper">
+                {
+                  Cars.map((car: CarType) => <CarCard car={car}/>)
+                }
+              </div>
+            </section>
+              :
+              <></>)
             }
           </div>
+          <ShowMoreButton 
+            pageNumber={(searchParams.limit || 10) / 10} 
+            isNext={((searchParams.limit || 10) < Cars.length) || ((Number(searchParams.limit) || 10) === Cars.length)}
+            />
         </div>
       </div>
     </main>
   )
 }
+
+// if searchParams.limit <= Cars.length means not all cars are displayed more cars can be shown.
+// if searchParams.limit > Cars.length means all cars are shown
+

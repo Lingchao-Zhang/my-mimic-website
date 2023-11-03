@@ -32,8 +32,31 @@ export interface CarsType{
     car: CarType
 }
 
-export interface CarsDetailsType{
+export interface CarsDetailType{
     isOpen: boolean,
     closeModal: () => void,
     car: CarType
 }
+
+export interface FilterType{
+    manufacturer: string,
+    model: string,
+    fuel: string,
+    year: number,
+    limit: number
+}
+
+export interface OptionType{
+    title: string,
+    value: string
+}
+export interface CustomFilterType{
+    title: string,
+    options: OptionType[]
+}
+
+export interface ShowMoreButtonType{
+    pageNumber: number,
+    isNext: Boolean
+}
+

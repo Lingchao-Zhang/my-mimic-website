@@ -1,10 +1,10 @@
-import { CarsDetailsType } from "@/types"
+import { CarsDetailType } from "@/types"
 import { generateImageUrl } from "@/utils"
 import { Dialog, Transition } from "@headlessui/react"
 import Image from "next/image"
 import { Fragment } from "react"
 
-const CarDetails = ({isOpen, closeModal, car}: CarsDetailsType) => {
+const CarDetails = ({isOpen, closeModal, car}: CarsDetailType) => {
     return(
         <>
          <Transition appear show={isOpen} as={Fragment}>
